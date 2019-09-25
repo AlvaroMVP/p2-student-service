@@ -47,12 +47,19 @@ public class StudentController {
 
 	/**
 	 * . method to search students by id
+	 * @throws Exception 
 	 */
 	@GetMapping("/student/{idStudent}")
-	public Mono<ResponseEntity<Student>> findById(@PathVariable String idStudent) {
+	public Mono<ResponseEntity<Student>> findById(@PathVariable String idStudent) throws Exception {
+		boolean ok = false;
+		if(ok == false) {
+			throw new Exception("Cant load student");
+		}
 		return studentService.findById(idStudent)
 				.map(p -> ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON_UTF8).body(p))
 				.defaultIfEmpty(ResponseEntity.notFound().build());
+		
+		
 	}
 
 	/**
