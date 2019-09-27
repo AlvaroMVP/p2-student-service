@@ -13,9 +13,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebFlux;
 @EnableSwagger2WebFlux
 public class ServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ServiceApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(ServiceApplication.class, args);
+  }
+
 }
 
 
