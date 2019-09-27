@@ -1,5 +1,8 @@
 package com.project.test;
 
+import com.project.model.Student;
+import com.project.service.impl.StudentServiceImpl;
+
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -9,9 +12,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
-
-import com.project.model.Student;
-import com.project.service.impl.StudentServiceImpl;
 
 import reactor.core.publisher.Mono;
 
@@ -23,7 +23,8 @@ public class StudentTest {
 
   @Test
   public void create() {
-    Student student = new Student("432dsffa22", "Andrea", "female", new Date(), "DNI", "43434343","3");
+    Student student = new Student("432dsffa22", "Andrea", "female", 
+        new Date(), "DNI", "43434343","3");
 
     client
         .post()
@@ -66,7 +67,8 @@ public class StudentTest {
     Student student = studentService.findById("5d7c0696e7ac942af83bef07").block();
     client
         .get()
-        .uri("/api/v1.0/student" + "/{idStudent}", Collections.singletonMap("idStudent", student.getIdStudent()))
+        .uri("/api/v1.0/student" + "/{idStudent}", Collections.singletonMap(
+         "idStudent", student.getIdStudent()))
         .accept(MediaType.APPLICATION_JSON_UTF8)
         .exchange()
         .expectStatus()
@@ -100,7 +102,8 @@ public class StudentTest {
 
     client
               .put()
-              .uri("/api/v1.0" + "/{idStudent}", Collections.singletonMap("idStudent", student.getIdStudent()))
+              .uri("/api/v1.0" + "/{idStudent}", Collections.singletonMap(
+               "idStudent", student.getIdStudent()))
               .contentType(MediaType.APPLICATION_JSON_UTF8)
               .accept(MediaType.APPLICATION_JSON_UTF8)
               .body(Mono.just(studentEdit), Student.class)
@@ -170,7 +173,8 @@ public class StudentTest {
     Student parent = studentService.findById("5d832c7aad119347a070e241").block();
     client
               .delete()
-              .uri("/api/v1.0" + "/{idStudent}", Collections.singletonMap("idStudent", parent.getIdStudent()))
+              .uri("/api/v1.0" + "/{idStudent}", Collections.singletonMap(
+               "idStudent", parent.getIdStudent()))
               .exchange()
               .expectStatus()
               .isNoContent()
@@ -179,7 +183,8 @@ public class StudentTest {
 
     client
               .get()
-              .uri("/api/v1.0" + "/{idStudent}", Collections.singletonMap("idStudent", parent.getIdStudent()))
+              .uri("/api/v1.0" + "/{idStudent}", Collections.singletonMap(
+               "idStudent", parent.getIdStudent()))
               .exchange()
               .expectStatus()
               .isNotFound()
