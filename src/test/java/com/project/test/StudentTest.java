@@ -1,7 +1,5 @@
 package com.project.test;
 
-import static org.junit.Assert.*;
-
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -145,11 +143,11 @@ public class StudentTest {
   @Test
   public void findByFullName() {
 
-    Student parent = studentService.findByFullName("Micaela Rubin").block();
+    Student student = studentService.findByFullName("Juan Perez").block();
     client
               .get()
               .uri("/api/v1.0" + "/fullName/{fullName}", 
-              Collections.singletonMap("fullName", parent.getFullName()))
+              Collections.singletonMap("fullName", student.getFullName()))
               .accept(MediaType.APPLICATION_JSON_UTF8)
               .exchange()
               .expectStatus()
